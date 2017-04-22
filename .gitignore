@@ -1,0 +1,10 @@
+.cask/
+python.html
+python.log
+python.pdf
+python.tex
+*.pyc
+*~
+*/env/
+*/env2/
+*/env3/

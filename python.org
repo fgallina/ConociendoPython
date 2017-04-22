@@ -1,0 +1,284 @@
+# -*- coding:utf-8 -*-
+#+Title: Conociendo Python
+#+Babel: :results silent
+#+AUTHOR: Fabián Ezequiel Gallina
+#+DESCRIPTION: Slides de Conociendo Python
+#+EMAIL: fgallina@gnu.org
+#+KEYWORDS: python, charla
+#+LANGUAGE: es
+#+OPTIONS: num:nil toc:t org-export-html-coding-system:utf-8
+#+startup: beamer
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [bigger]
+#+BEAMER_FRAME_LEVEL: 1
+
+* ¿Qué es Python? (1)
+
++ Lenguaje de programación alto (altísimo) nivel.
+  - Multiparadigma (aunque en Python todo es un objeto)
+  - Multipropósito
+  - Multiplataforma
+  - MultiMulti
+
+* ¿Qué es Python? (2)
+
++ Es una especificación con muchas implementaciones
+  - CPython: La madre de todas las implementaciones, escrita en C.
+  - Jython: Python implementado Java.
+  - IronPython: Python implementado en C#.
+  - Bryton: Python implementado en JavaScript.
+  - RubyPython: Python implementado en Ruby.
+  - Pypy: Python implementado en... Python!!!
+
+* ¿Qué es Python? (3)
+
+"Lo mejor que te va a pasar en tu vida ñoña!" (Naty Bidart @ #pyar)
+
+* Algo de información
+
++ Creado por Guido Van Rossum a finales de los '80
++ Uno de sus objetivos es conseguir la mejor legibilidad del código posible
++ Es probablemente el lenguaje más simple para aprender
++ Es uno de los lenguajes de mayor crecimiento del último tiempo
+
+* ¿Quienes lo usan?
+
++ NASA
++ Google
++ IBM
++ Yahoo
++ Star Wars (Industrial Lights and Magic)
+
+* Python en acción
+
++ wicd: https://launchpad.net/wicd
++ Mailman: https://gitlab.com/mailman/mailman
++ Fofix (fork de FretsOnFire): http://fofix.github.io/
++ Blender: http://www.blender.org/
++ Mercurial: http://mercurial.selenic.com/
++ Exaile: http://www.exaile.org/
++ Mozilla Addons: http://addons.mozilla.com/ (https://github.com/mozilla/addons-server)
+
+* Hello World (Java)
+#+BEGIN_SRC java
+  class HelloWorld
+  {
+      public static void main(String args[])
+      {
+          System.out.println("Hello World!");
+      }
+  }
+#+end_src
+
+* Hello World (C)
+#+BEGIN_SRC c
+  #include <stdio.h>
+  void main(void)
+  {
+      printf("Hello World!");
+  }
+#+end_src
+
+* Hello World (PHP)
+#+BEGIN_SRC php
+  <?php echo "Hello World!"; ?>
+#+end_src
+
+* Hello World (Python2)
+#+BEGIN_SRC python
+  print "Hello World!"
+#+END_SRC
+
+* Hello World (Python3)
+#+BEGIN_SRC python
+  print("Hello World!")
+#+END_SRC
+
+* Ejecución de un programa python
+
++ No hace falta pre-compilar los archivos antes de correrlos
++ Basta ejecutar: python programa.py
++ Python compilará automáticamente a bytecode (*.pyc) módulos importados
+
+* La consola interactiva
+#+BEGIN_SRC sh
+  $ python3
+  Python 3.5.2 (default, Nov 17 2016, 17:05:23) 
+  [GCC 5.4.0 20160609] on linux
+  Type "help", "copyright", "credits" or "license" for more information.
+  >>> 
+#+END_SRC
+
+* La consola interactiva nos permite
+
++ Jugar con los comportamientos del lenguaje
++ Probar antes de implementar
++ Leer la documentación
+
+* Versiones de python
+
++ Python 2: La especificación más extendida de Python actualmente.
++ Python 3: La especificación más reciente que de a poco se está
+  volviendo estandar. Todas las librerías y aplicaciones existentes
+  están migrando de a poco a esta nueva plataforma. De hecho
+  http://py3readiness.org/ reporta que 343 de los 360 packages mas
+  utilizados soportan Python 3!
+
+* Tipado dinámico y fuerte
+
++ Las variables pueden contener cualquier tipo de dato.
++ El tipado es fuerte: *No* se pueden operar peras con manzanas (duck typing).
+#+BEGIN_SRC python
+  a = 5
+  a = "10"
+  a + 5
+#+END_SRC
+
+* Tipos de datos básicos
+#+BEGIN_SRC python
+  "What's \"42\"?"
+  'What\'s "42"?'
+  """What's "42"?"""
+  (1, 2, 3)
+  ["gnu", "linux"]
+  {'SO': 'GNU/Linux', 'on': True}
+  set([1, 2, 3])
+  5412
+  3.41
+  3j+3
+  True; False
+#+END_SRC
+
+* Las variables son referencias.
+#+BEGIN_SRC python
+  lst = [1, 2, 3]
+
+  def add(lista):
+     lista.append(4)
+
+  add(lst)
+
+  print (lst)
+#+END_SRC
+
+* Las funciones son ciudadanos de primer nivel.
+#+BEGIN_SRC python
+  lst = [1, 2, 3, 4, 5, 6]
+
+  def add5(a):
+      return a + 5
+
+  print (list(map(add5, lst)))
+#+END_SRC
+
+* En Python *todo* es un objeto.
+#+BEGIN_SRC python
+  lst = [1, 2, 3]
+  print (dir(lst))
+  print (dir(5))
+#+END_SRC
+
+* La documentación de los objetos está a la orden del día.
+#+BEGIN_SRC python
+  lst = [1, 2, 3, 4]
+  help(lst)
+#+END_SRC
+
+* Python viene con baterías incluídas.
+
++ http
++ json
++ sqlite3
++ xml
++ zlib; gzip; zipfile
++ ...
+
+* Otras baterías
+#+BEGIN_SRC sh
+  $ pip search pillow
+  Pillow                    - Python Imaging Library (fork)
+  eirx                      - Simple image manipulate based on Pillow.
+  pillowtop                 - A couchdbkit changes listener for doing backend processing
+  pillowfluff               - Map over CouchDB changes feed built to run on Pillowtop
+  Pillow-PIL                - Pillow wrapper for PIL compatibility
+
+  $ pip install Pillow
+#+END_SRC
+
+* Módulos propios
+#+BEGIN_SRC sh
+mimodulo/__init__.py
+mimodulo/utils.py
+mimodulo/net.py
+mimodulo/submodulo/__init__.py
+mimodulo/submodulo/nasa.py
+#+END_SRC
+#+BEGIN_SRC sh
+$ PYTHONPATH=/parent/of/:$PYTHONPATH python3
+Python 3.5.2 (default, Nov 17 2016, 17:05:23) 
+[GCC 5.4.0 20160609] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from mimodulo.net import connect
+>>> from mimodulo.submodulo import nasa
+>>> connect(to=nasa)
+#+END_SRC
+
+* Virtualenv
+
++ Nos permite isolar nuestro paquetes de desarrollo con los del sistema
+#+BEGIN_SRC sh
+$ virtualenv --python=python3 env
+$ source env/bin/activate
+(env)$ # Trabajo muy duro, como un esclavo...
+(env)$ deactivate
+$
+#+END_SRC
+
+* A los bifes, (un poco de live coding):
+
+Vamos a inventar algún ejemplo que aplique la mayoría de estos conceptos :)
+
++ virtualenv y pip al rescate
++ La indentación importa
++ Funciones con argumentos posicionales y de palabra clave
++ Manejo simple de excepciones
++ Context managers
++ Decorators
++ Generadores
++ Clases, métodos de clase, estáticos, "protegidos" y "privados"
++ Scopes (local, global, built-in)
+
+* Links
+
++ PyAR (Python Argentina): http://www.python.com.ar
++ Tutorial de Python en español!: http://docs.python.org.ar/tutorial/
++ Python (Sitio Oficial): http://www.python.org
++ Python Package Index: http://pypi.python.org
++ Scientific Tools for Python: http://www.scipy.org/
++ iPython: http://ipython.org/
++ Esta charla: https://github.com/fgallina/ConociendoPython
+
+* Licencia
+
+#+BEGIN_SRC txt
+Creative Commons Atribución-CompartirDerivadasIgual 3.0 Unported.
+
+Usted es libre de:
+
+  + Compartir - copiar, distribuir, ejecutar y comunicar públicamente la obra
+  + hacer obras derivadas
+  + hacer un uso comercial de esta obra
+
+Bajo las condiciones siguientes:
+
+  + Atribución: Debe reconocer los créditos de la obra de la manera
+    especificada por el autor o el licenciante (pero no de una manera que
+    sugiera que tiene su apoyo o que apoyan el uso que hace de su obra).
+
+  + Compartir bajo la Misma Licencia: Si altera o transforma esta obra, o
+    genera una obra derivada, sólo puede distribuir la obra generada bajo una
+    licencia idéntica a ésta.
+
+Resumen Texto Legal: http://creativecommons.org/licenses/by-sa/3.0/deed.es
+Licencia Completa: http://creativecommons.org/licenses/by-sa/3.0/legalcode
+#+END_SRC
